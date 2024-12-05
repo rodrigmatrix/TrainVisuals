@@ -1,0 +1,290 @@
+<WELayout>
+  <children>
+    <self itemName="Left Side">
+      <transform>
+        <offsetPosition x="-1.46" y="0" z="-0.03999998" />
+        <offsetRotation x="-0" y="270" z="0" />
+        <scale x="1" y="1" z="1" />
+      </transform>
+      <textMesh fontName="">
+        <text></text>
+      </textMesh>
+      <defaultStyle>
+        <color>FFFFFFFF</color>
+        <emissiveColor>FFFFFFFF</emissiveColor>
+        <metallic>0</metallic>
+        <smoothness>0</smoothness>
+        <emissiveIntensity>0</emissiveIntensity>
+        <emissiveExposureWeight>0</emissiveExposureWeight>
+        <coatStrength>0</coatStrength>
+        <colorMask1>FFFFFF</colorMask1>
+        <colorMask2>FFFFFF</colorMask2>
+        <colorMask3>FFFFFF</colorMask3>
+      </defaultStyle>
+    </self>
+    <children>
+      <self itemName="Operator Logo">
+        <transform>
+          <offsetPosition x="2.64999986" y="1.86" z="0" />
+          <offsetRotation x="-0" y="0" z="0" />
+          <scale x="0.5" y="0.5" z="1" />
+        </transform>
+        <imageMesh atlas="TrainVisuals:main">
+          <image formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayOperatorLogo">MetroLogoWhite</image>
+        </imageMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+    <children>
+      <self itemName="Operator Icon Front">
+        <transform>
+          <offsetPosition x="8.539999" y="2.556152" z="-0.07477692" />
+          <offsetRotation x="349.999969" y="0" z="0" />
+          <scale x="0.35" y="0.35" z="1" />
+        </transform>
+        <imageMesh atlas="TrainVisuals:main">
+          <image formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayOperatorIcon">MetroOperatorWhite</image>
+        </imageMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+    <children>
+      <self itemName="Train Number Front">
+        <transform>
+          <offsetPosition x="8.4" y="2.861442" z="-0.128607869" />
+          <offsetRotation x="349.999969" y="0" z="0" />
+          <scale x="0.2" y="0.2" z="1" />
+        </transform>
+        <textMesh fontName="HelveticaWorld_Regular">
+          <text formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayTrainName">A023</text>
+        </textMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+    <children>
+      <self itemName="Train Number Back">
+        <transform>
+          <offsetPosition x="-8.370001" y="2.861442" z="-0.128607869" />
+          <offsetRotation x="349.999969" y="0" z="0" />
+          <scale x="0.2" y="0.2" z="1" />
+        </transform>
+        <textMesh fontName="HelveticaWorld_Regular">
+          <text formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayTrainName">A023</text>
+        </textMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+    <children>
+      <self itemName="Operator Icon Back">
+        <transform>
+          <offsetPosition x="-8.54" y="2.556152" z="-0.07477692" />
+          <offsetRotation x="349.999969" y="0" z="0" />
+          <scale x="0.35" y="0.35" z="1" />
+        </transform>
+        <imageMesh atlas="TrainVisuals:main">
+          <image formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayOperatorIcon">MetroOperatorWhite</image>
+        </imageMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+  </children>
+  <children>
+    <self itemName="Right Side">
+      <transform>
+        <offsetPosition x="1.46000028" y="0" z="-0.03999986" />
+        <offsetRotation x="-0" y="270" z="0" />
+        <scale x="1" y="1" z="1" />
+      </transform>
+      <textMesh fontName="">
+        <text></text>
+      </textMesh>
+      <defaultStyle>
+        <color>FFFFFFFF</color>
+        <emissiveColor>FFFFFFFF</emissiveColor>
+        <metallic>0</metallic>
+        <smoothness>0</smoothness>
+        <emissiveIntensity>0</emissiveIntensity>
+        <emissiveExposureWeight>0</emissiveExposureWeight>
+        <coatStrength>0</coatStrength>
+        <colorMask1>FFFFFF</colorMask1>
+        <colorMask2>FFFFFF</colorMask2>
+        <colorMask3>FFFFFF</colorMask3>
+      </defaultStyle>
+    </self>
+    <children>
+      <self itemName="Operator Logo">
+        <transform>
+          <offsetPosition x="2.64999986" y="1.86" z="0" />
+          <offsetRotation x="-0" y="180" z="0" />
+          <scale x="0.5" y="0.5" z="1" />
+        </transform>
+        <imageMesh atlas="TrainVisuals:main">
+          <image formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayOperatorLogo">ViaQuatroLogoWhite</image>
+        </imageMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+    <children>
+      <self itemName="Operator Icon Front">
+        <transform>
+          <offsetPosition x="8.629999" y="2.52663183" z="0.09264027" />
+          <offsetRotation x="349.999969" y="180" z="0" />
+          <scale x="0.35" y="0.35" z="1" />
+        </transform>
+        <imageMesh atlas="TrainVisuals:main">
+          <image formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayOperatorIcon">ViaMobilidadeOperatorWhite</image>
+        </imageMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+    <children>
+      <self itemName="Train Number Front">
+        <transform>
+          <offsetPosition x="8.49" y="2.81455684" z="0.13729009" />
+          <offsetRotation x="349.999969" y="180" z="0" />
+          <scale x="0.2" y="0.2" z="1" />
+        </transform>
+        <textMesh fontName="HelveticaWorld_Regular">
+          <text formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayTrainName">A023</text>
+        </textMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+    <children>
+      <self itemName="Train Number Back">
+        <transform>
+          <offsetPosition x="-8.370001" y="2.81455684" z="0.137289762" />
+          <offsetRotation x="349.999969" y="180" z="0" />
+          <scale x="0.2" y="0.2" z="1" />
+        </transform>
+        <textMesh fontName="HelveticaWorld_Regular">
+          <text formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayTrainName">A023</text>
+        </textMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+    <children>
+      <self itemName="Operator Icon Back">
+        <transform>
+          <offsetPosition x="-8.54" y="2.52836823" z="0.08279228" />
+          <offsetRotation x="349.999969" y="180" z="0" />
+          <scale x="0.35" y="0.35" z="1" />
+        </transform>
+        <imageMesh atlas="TrainVisuals:main">
+          <image formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetSubwayOperatorIcon">ViaMobilidadeOperatorWhite</image>
+        </imageMesh>
+        <defaultStyle>
+          <color>FFFFFFFF</color>
+          <emissiveColor>FFFFFFFF</emissiveColor>
+          <metallic>0</metallic>
+          <smoothness>0</smoothness>
+          <emissiveIntensity>0</emissiveIntensity>
+          <emissiveExposureWeight>0</emissiveExposureWeight>
+          <coatStrength>0</coatStrength>
+          <colorMask1>FFFFFF</colorMask1>
+          <colorMask2>FFFFFF</colorMask2>
+          <colorMask3>FFFFFF</colorMask3>
+        </defaultStyle>
+      </self>
+    </children>
+  </children>
+</WELayout>

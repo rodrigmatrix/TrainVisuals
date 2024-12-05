@@ -1,0 +1,42 @@
+﻿<Publish>
+	<!--Id must be set in order to update existed mod. it is not required for publishing mod for the first time-->
+	<ModId Value="95885" />
+	<!--Name of the mod to display to players-->
+	<DisplayName Value="Train Visuals" />
+	<!--Short description of the mod-->
+	<ShortDescription Value="Train Visuals" />
+	<!--Long description of the mod. Single line or multi line. Supports minimal markdown subset-->
+	<!--LongDescription Value="This is a long description" /-->
+	<LongDescription>
+# Train Visuals [WE Module]
+Have details about your trains when you install this mod. This mod is a Write Everywhere Module.
+		
+# How it works
+The operators are based on the Sao Paulo Metro Operators. You will see the destination and operators for subway and passenger train lines.
+The train numbers are ordered based on their depot. The last digit is the number of the car. The letter corresponds to the model of the train.
+Just install this mod and you will start seeing the visuals.
+
+Thanks to Klyte45 for his incredible work
+	</LongDescription>
+	<!--Thumbnail-->
+	<Thumbnail Value="ParadoxRes/Thumbnail.png" />
+	<Screenshot Value="ParadoxRes/Screenshot1.png" />
+	<Screenshot Value="ParadoxRes/Screenshot2.png" />
+	<Screenshot Value="ParadoxRes/Screenshot3.png" />
+	<Screenshot Value="ParadoxRes/Screenshot4.png" />
+	<Screenshot Value="ParadoxRes/Screenshot5.png" />
+	<Screenshot Value="ParadoxRes/Screenshot6.png" />
+	<Screenshot Value="ParadoxRes/Screenshot7.png" />
+	<Screenshot Value="ParadoxRes/Screenshot8.png" />
+	<!--Tag, can be set multiple times-->
+	<Tag Value="Code Mod" />
+	<!--Link to the forum post where the mod can be discussed-->
+	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/train-visuals-mod.1719529/" />
+	<ModVersion Value="1.0" />
+	<GameVersion Value="1.1.*" />
+	<Dependency Id="92908" />
+	<Dependency Id="75426" />
+	<ChangeLog Value="" />
+	<ExternalLink Type="kofi" Url="https://ko-fi.com/rodrigmatrix" />
+	<ExternalLink Type="github" Url="https://github.com/rodrigmatrix/TrainVisuals" />
+</Publish>
