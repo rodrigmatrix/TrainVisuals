@@ -74,7 +74,7 @@ namespace TrainVisuals
                     foreach (var method in type.GetMethods(BindingFlags.Public | BindingFlags.Static))
                     {
                         var srcMethod = targetType.GetMethod(method.Name, allFlags, null, method.GetParameters().Select(x => x.ParameterType).ToArray(), null);
-                        if (srcMethod != null) Harmony.ReversePatch(srcMethod, method);
+                        if (srcMethod != null) Harmony.ReversePatch(srcMethod, new HarmonyMethod(method));
                         else log.Warn($"Method not found while patching WE: {targetType.FullName} {srcMethod.Name}({string.Join(", ", method.GetParameters().Select(x => $"{x.ParameterType}"))})");
                     }
                 }
