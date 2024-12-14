@@ -14,7 +14,7 @@ namespace TrainVisuals
 {
     public class Mod : IMod
     {
-        public static ILog log = LogManager.GetLogger($"{nameof(TrainVisuals)}.{nameof(Mod)}").SetShowsErrorsInUI(false);
+         public static ILog log = LogManager.GetLogger($"{typeof(Mod).Assembly.GetName().Name}.{nameof(Mod)}").SetShowsErrorsInUI(false);
         private static readonly BindingFlags allFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.GetField | BindingFlags.GetProperty;
 
         public void OnLoad(UpdateSystem updateSystem)
@@ -23,10 +23,10 @@ namespace TrainVisuals
 
             if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
                 log.Info($"Current mod asset at {asset.path}");
-            
+
             GameManager.instance.onGameLoadingComplete += DoWhenLoaded;
         }
-        
+
         private void DoWhenLoaded(Colossal.Serialization.Entities.Purpose purpose, GameMode mode)
         {
             log.Info($"Loading patches");
@@ -64,7 +64,7 @@ namespace TrainVisuals
             if (AppDomain.CurrentDomain.GetAssemblies().SingleOrDefault(assembly => assembly.GetName().Name == "BelzontWE") is Assembly weAssembly)
             {
                 var exportedTypes = weAssembly.ExportedTypes;
-                foreach (var (type, sourceClassName) in new List<(Type, string)> {
+                foreach (var (type, sourceClassName) in new List<(Type, string)>() {
                     (typeof(WEFontManagementBridge), "FontManagementBridge"),
                     (typeof(WEImageManagementBridge), "ImageManagementBridge"),
                     (typeof(WETemplatesManagementBridge), "TemplatesManagementBridge"),

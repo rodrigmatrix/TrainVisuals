@@ -132,10 +132,8 @@ public static class TrainFormulas
         var entityDebugName = _nameSystem.GetDebugName(entityRef);
         var entityName = entityDebugName.TrimEnd(' ').Remove(entityDebugName.LastIndexOf(' ') + 1);
         string letter = "F";
-        Mod.log.Info($"{entityName}");
         if (ModelsDictionary.ContainsKey(entityName))
         {
-            Mod.log.Info($"{entityName}: {ModelsDictionary[entityName]}");
             letter = ModelsDictionary[entityName];
         }
 
@@ -250,7 +248,6 @@ public static class TrainFormulas
         }
         catch (Exception e)
         {
-            Mod.log.Info(e.ToString());
             return "";
         }
     };
