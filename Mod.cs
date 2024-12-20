@@ -3,11 +3,15 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Colossal.IO.AssetDatabase.Internal;
 using Colossal.Logging;
 using Game;
 using Game.Modding;
 using Game.SceneFlow;
+using Game.Simulation;
+using Game.UI.InGame;
 using HarmonyLib;
+using TrainVisuals.Code;
 using TrainVisuals.Code.WEBridge;
 
 namespace TrainVisuals
@@ -24,7 +28,14 @@ namespace TrainVisuals
             if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
                 log.Info($"Current mod asset at {asset.path}");
 
+            //updateSystem.UpdateAt<HomelessRemoverSystem>(SystemUpdatePhase.PrefabUpdate);
             GameManager.instance.onGameLoadingComplete += DoWhenLoaded;
+            var mHarmony = new Harmony("Mods_TrainVisuals");
+            mHarmony.PatchAll();
+            Harmony.GetAllPatchedMethods().ForEach(m => {
+                if (m.GetType() == typeof(Mod))
+                    log.Info($"Patched: {m.Name}");
+            });
         }
 
         private void DoWhenLoaded(Colossal.Serialization.Entities.Purpose purpose, GameMode mode)

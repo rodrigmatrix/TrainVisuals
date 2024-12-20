@@ -1,5 +1,6 @@
 ﻿// Code by Klyte45
 
+using System;
 using Game.SceneFlow;
 using Game.UI;
 using HarmonyLib;
@@ -23,28 +24,35 @@ public static class NameSystemExtensions
 
     public static string Translate(this NameSystem.Name name)
     {
-        var type = name.GetNameType();
-        switch (type)
+        try
         {
-            default:
-            case NameSystem.NameType.Custom:
-                return name.GetNameID();
-            case NameSystem.NameType.Localized:
-                return GameManager.instance.localizationManager.activeDictionary.TryGetValue(name.GetNameID(),
-                    out var value)
-                    ? value
-                    : name.GetNameID();
-            case NameSystem.NameType.Formatted:
-                var activeDictionary = GameManager.instance.localizationManager.activeDictionary;
-                var format = activeDictionary.TryGetValue(name.GetNameID(), out var value2) ? value2 : name.GetNameID();
-                var args = name.GetNameArgs();
-                for (var i = 0; i < args.Length; i += 2)
-                {
-                    format = format.Replace($"{{{args[i]}}}",
-                        activeDictionary.TryGetValue(args[i + 1], out value2) ? value2 : args[i + 1]);
-                }
+            var type = name.GetNameType();
+            switch (type)
+            {
+                default:
+                case NameSystem.NameType.Custom:
+                    return name.GetNameID();
+                case NameSystem.NameType.Localized:
+                    return GameManager.instance.localizationManager.activeDictionary.TryGetValue(name.GetNameID(),
+                        out var value)
+                        ? value
+                        : name.GetNameID();
+                case NameSystem.NameType.Formatted:
+                    var activeDictionary = GameManager.instance.localizationManager.activeDictionary;
+                    var format = activeDictionary.TryGetValue(name.GetNameID(), out var value2) ? value2 : name.GetNameID();
+                    var args = name.GetNameArgs();
+                    for (var i = 0; i < args.Length; i += 2)
+                    {
+                        format = format.Replace($"{{{args[i]}}}",
+                            activeDictionary.TryGetValue(args[i + 1], out value2) ? value2 : args[i + 1]);
+                    }
 
-                return format;
+                    return format;
+            }
+        } catch (Exception e)
+        {
+            Mod.log.Info(e);
+            return "";
         }
     }
 }
