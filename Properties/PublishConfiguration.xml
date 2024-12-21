@@ -32,13 +32,13 @@ Thanks to Klyte45 for his incredible work
 	<Tag Value="Code Mod" />
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/train-visuals-mod.1719529/" />
-	<ModVersion Value="1.0.3" />
+	<ModVersion Value="1.0.4" />
 	<GameVersion Value="1.*" />
 	<Dependency Id="92908" />
 	<Dependency Id="75426" />
   <ChangeLog>
-# Release 1.0.3
-- Added error check for I18n EveryWhere
+# Release 1.0.4
+- Added null check for entry id
   </ChangeLog>
 	<ExternalLink Type="kofi" Url="https://ko-fi.com/rodrigmatrix" />
 	<ExternalLink Type="github" Url="https://github.com/rodrigmatrix/TrainVisuals" />

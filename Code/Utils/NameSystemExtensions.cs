@@ -27,19 +27,24 @@ public static class NameSystemExtensions
         try
         {
             var type = name.GetNameType();
+            var nameId = name.GetNameID();
+            if (string.IsNullOrEmpty(nameId))
+            {
+                return "";
+            }
             switch (type)
             {
                 default:
                 case NameSystem.NameType.Custom:
-                    return name.GetNameID();
+                    return nameId;
                 case NameSystem.NameType.Localized:
-                    return GameManager.instance.localizationManager.activeDictionary.TryGetValue(name.GetNameID(),
+                    return GameManager.instance.localizationManager.activeDictionary.TryGetValue(nameId,
                         out var value)
                         ? value
-                        : name.GetNameID();
+                        : nameId;
                 case NameSystem.NameType.Formatted:
                     var activeDictionary = GameManager.instance.localizationManager.activeDictionary;
-                    var format = activeDictionary.TryGetValue(name.GetNameID(), out var value2) ? value2 : name.GetNameID();
+                    var format = activeDictionary.TryGetValue(nameId, out var value2) ? value2 : nameId;
                     var args = name.GetNameArgs();
                     for (var i = 0; i < args.Length; i += 2)
                     {
