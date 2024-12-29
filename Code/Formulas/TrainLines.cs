@@ -11,6 +11,7 @@ using Game.Vehicles;
 using TrainVisuals.Code.Utils;
 using Unity.Entities;
 using Unity.Mathematics;
+using TransportStop = Game.Routes.TransportStop;
 
 namespace TrainVisuals.Code.Formulas;
 
@@ -177,6 +178,23 @@ public static class TrainFormulas
         return " ";
     };
     
+    private static List<RouteWaypoint> GetStops(EntityManager entityManager, Entity entity)
+    {
+        _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
+        var buffer = entityManager.GetBuffer<RouteWaypoint>(entity, true);
+        var waypoints = new List<RouteWaypoint>();
+        for (var index = 0; index < buffer.Length; ++index)
+        {
+            if (entityManager.TryGetComponent(buffer[index].m_Waypoint, out Connected component) &&
+                entityManager.HasComponent<TransportStop>(component.m_Connected) &&
+                !entityManager.HasComponent<TaxiStand>(component.m_Connected))
+            {
+                waypoints.Add(buffer[index]);
+            }
+        }
+        return waypoints.Take((waypoints.Count / 2) + 1).ToList();
+    }
+    
     private static readonly Func<Entity, string> GetDestinationBinding = (entityRef) =>
     {
         try
@@ -187,64 +205,24 @@ public static class TrainFormulas
             _entityManager.TryGetComponent<Controller>(entityRef, out var controller);
             _entityManager.TryGetBuffer<LayoutElement>(controller.m_Controller, true, out var layoutElements);
             
-            // var carIndex = 0;
-            // for (var i = 0; i < layoutElements.Length; i++)
-            // {
-            //     if (layoutElements[i].m_Vehicle == entityRef)
-            //     {
-            //         carIndex = i;
-            //     }
-            // }
-            //
-            // if (carIndex != 0)
-            // {
-            //     return " ";
-            // }
             
             _entityManager.TryGetComponent<TrainNavigation>(controller.m_Controller, out var trainNavigation);
             _entityManager.TryGetComponent<CurrentRoute>(controller.m_Controller, out var currentRoute);
-            _entityManager.TryGetBuffer<RouteWaypoint>(currentRoute.m_Route, true, out var routeWaypoints);
-            var filteredWaypoints = new List<RouteWaypoint>();
-            //var closestWaypoint = routeWaypoints[0];
-            //var furthestWaypoint = routeWaypoints[0];
-            var closestDistance = 0f;
-            var furthestDistance = 0f;
-            for (var i = 0; i < routeWaypoints.Length; i++)
+            var stops = GetStops(_entityManager, currentRoute.m_Route);
+            var closestDistance = float3.zero;
+            if (_entityManager.TryGetComponent<Position>(stops.FirstOrDefault().m_Waypoint, out var firstStationPosition))
             {
-                if (_entityManager.HasComponent<Connected>(routeWaypoints[i].m_Waypoint))
-                {
-                    // if (_entityManager.TryGetComponent<Position>(routeWaypoints[i].m_Waypoint, out var waypointPosition))
-                    // {
-                    //     _entityManager.TryGetComponent<Position>(closestWaypoint.m_Waypoint, out var closestPosition);
-                    //     _entityManager.TryGetComponent<Position>(furthestWaypoint.m_Waypoint, out var furthestPosition);
-                    //     var distanceClosest = math.distance(closestPosition.m_Position, waypointPosition.m_Position);
-                    //     var distanceFurthest = math.distance(furthestPosition.m_Position, waypointPosition.m_Position);
-                    //     if (closestDistance < distanceClosest)
-                    //     {
-                    //         closestDistance = distanceClosest;
-                    //         closestWaypoint = routeWaypoints[i];
-                    //     }
-                    //
-                    //     if (distanceFurthest > furthestDistance)
-                    //     {
-                    //         furthestDistance = distanceFurthest;
-                    //         furthestWaypoint = routeWaypoints[i];
-                    //     }
-                    // }
-                    filteredWaypoints.Add(routeWaypoints[i]);
-                }
+                closestDistance = firstStationPosition.m_Position;
             }
-            // Mod.log.Info("Closest " +GetRouteBuildingName(closestWaypoint));
-            // Mod.log.Info("Fursthest " + GetRouteBuildingName(furthestWaypoint));
             var distanceFront = math.distance(closestDistance, trainNavigation.m_Front.m_Position);
             var distanceBack = math.distance(closestDistance, trainNavigation.m_Rear.m_Position);
-           
+            
             if (distanceFront < distanceBack)
             {
-                return GetRouteBuildingName(filteredWaypoints[0]);
+                return GetRouteBuildingName(stops[0]);
             }
 
-            return GetRouteBuildingName(filteredWaypoints[filteredWaypoints.Count - 1]);
+            return GetRouteBuildingName(stops[stops.Count - 1]);
         }
         catch (Exception e)
         {

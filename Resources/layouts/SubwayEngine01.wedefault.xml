@@ -413,7 +413,7 @@
           <offsetRotation x="344" y="0" z="0" />
           <scale x="0.15" y="0.15" z="1" />
         </transform>
-        <textMesh fontName="">
+        <textMesh fontName="HelveticaWorld_Regular">
           <text formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetDestination">Farview Banks</text>
         </textMesh>
         <defaultStyle>
@@ -461,7 +461,7 @@
           <offsetRotation x="344" y="0" z="0" />
           <scale x="0.1" y="0.1" z="1" />
         </transform>
-        <textMesh fontName="">
+        <textMesh fontName="HelveticaWorld_Regular">
           <text formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetDestinationTitle">Destination:</text>
         </textMesh>
         <defaultStyle>

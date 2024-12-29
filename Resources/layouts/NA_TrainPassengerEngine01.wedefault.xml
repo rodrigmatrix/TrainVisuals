@@ -221,7 +221,7 @@
           <offsetRotation x="320" y="0" z="0" />
           <scale x="0.1" y="0.1" z="1" />
         </transform>
-        <textMesh fontName="">
+        <textMesh fontName="HelveticaWorld_Regular">
           <text formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetDestinationTitle">NEW TEXT</text>
         </textMesh>
         <defaultStyle>
@@ -245,7 +245,7 @@
           <offsetRotation x="320" y="0" z="0" />
           <scale x="0.13" y="0.13" z="1" />
         </transform>
-        <textMesh fontName="">
+        <textMesh fontName="HelveticaWorld_Regular">
           <text formulae="&amp;TrainVisuals.Code.Formulas.TrainFormulas;GetDestination">NEW TEXT</text>
         </textMesh>
         <defaultStyle>
