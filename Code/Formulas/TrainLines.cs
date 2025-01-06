@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using Colossal.Entities;
 using Game.Common;
+using Game.Pathfind;
 using Game.Prefabs;
 using Game.Routes;
 using Game.UI;
@@ -173,26 +174,57 @@ public static class TrainFormulas
             }
         }
 
-        return "Destination"; 
-        
-        return " ";
+        return Mod.m_Setting.DestinationTypeDropdown != Settings.DestinationType.LineName ? "Destination" : "Line";
     };
     
-    private static List<RouteWaypoint> GetStops(EntityManager entityManager, Entity entity)
+    private static List<RouteWaypoint> GetStops(Entity entity)
     {
         _entityManager = World.DefaultGameObjectInjectionWorld.EntityManager;
-        var buffer = entityManager.GetBuffer<RouteWaypoint>(entity, true);
+        var buffer = _entityManager.GetBuffer<RouteWaypoint>(entity, true);
         var waypoints = new List<RouteWaypoint>();
         for (var index = 0; index < buffer.Length; ++index)
         {
-            if (entityManager.TryGetComponent(buffer[index].m_Waypoint, out Connected component) &&
-                entityManager.HasComponent<TransportStop>(component.m_Connected) &&
-                !entityManager.HasComponent<TaxiStand>(component.m_Connected))
+            if (_entityManager.TryGetComponent(buffer[index].m_Waypoint, out Connected component) &&
+                _entityManager.HasComponent<TransportStop>(component.m_Connected) &&
+                !_entityManager.HasComponent<TaxiStand>(component.m_Connected))
             {
                 waypoints.Add(buffer[index]);
             }
         }
-        return waypoints.Take((waypoints.Count / 2) + 1).ToList();
+            
+        var singleStops = new Dictionary<Entity, List<RouteWaypoint>>();
+
+        for (var i = 0; i < waypoints.Count; ++i)
+        {
+            if (_entityManager.TryGetComponent<Connected>(waypoints[i].m_Waypoint, out var connected))
+            {
+                var owner = GetOwnerRecursive(connected.m_Connected);
+                if (singleStops.ContainsKey(owner))
+                {
+                    singleStops[owner].Add(waypoints[i]);
+                }
+                else
+                {
+                    singleStops[owner] = [waypoints[i]];
+                }
+            }
+        }
+        return singleStops
+            .Where(x => x.Value.Count == 1)
+            .Select(x => x.Value.FirstOrDefault())
+            .ToList();
+    }
+    
+    private static Entity GetOwnerRecursive(Entity entity)
+    {
+        if (_entityManager.TryGetComponent<Owner>(entity, out var owner))
+        {
+            return GetOwnerRecursive(owner.m_Owner);
+        }
+        else
+        {
+            return entity;
+        }
     }
     
     private static readonly Func<Entity, string> GetDestinationBinding = (entityRef) =>
@@ -204,29 +236,37 @@ public static class TrainFormulas
 
             _entityManager.TryGetComponent<Controller>(entityRef, out var controller);
             _entityManager.TryGetBuffer<LayoutElement>(controller.m_Controller, true, out var layoutElements);
-            
-            
-            _entityManager.TryGetComponent<TrainNavigation>(controller.m_Controller, out var trainNavigation);
             _entityManager.TryGetComponent<CurrentRoute>(controller.m_Controller, out var currentRoute);
-            var stops = GetStops(_entityManager, currentRoute.m_Route);
-            var closestDistance = float3.zero;
-            if (_entityManager.TryGetComponent<Position>(stops.FirstOrDefault().m_Waypoint, out var firstStationPosition))
+            switch (Mod.m_Setting.DestinationTypeDropdown)
             {
-                closestDistance = firstStationPosition.m_Position;
-            }
-            var distanceFront = math.distance(closestDistance, trainNavigation.m_Front.m_Position);
-            var distanceBack = math.distance(closestDistance, trainNavigation.m_Rear.m_Position);
-            
-            if (distanceFront < distanceBack)
-            {
-                return GetRouteBuildingName(stops[0]);
-            }
+                case Settings.DestinationType.LineName:
+                    return _nameSystem.GetName(currentRoute.m_Route).Translate();
+                case Settings.DestinationType.NextStation:
+                    _entityManager.TryGetComponent<PathInformation>(controller.m_Controller, out var pathInformation);
+                    _entityManager.TryGetComponent<Connected>(pathInformation.m_Destination, out var connected);
+                    var station = GetOwnerRecursive(connected.m_Connected);
+                    return _nameSystem.GetName(station).Translate();
+                case Settings.DestinationType.FinalDestination:
+                default:
+                {
+                    _entityManager.TryGetComponent<TrainNavigation>(controller.m_Controller, out var trainNavigation);
+                    var stops = GetStops(currentRoute.m_Route);
+                    var closestDistance = float3.zero;
+                    if (_entityManager.TryGetComponent<Position>(stops.FirstOrDefault().m_Waypoint, out var firstStationPosition))
+                    {
+                        closestDistance = firstStationPosition.m_Position;
+                    }
+                    var distanceFront = math.distance(closestDistance, trainNavigation.m_Front.m_Position);
+                    var distanceBack = math.distance(closestDistance, trainNavigation.m_Rear.m_Position);
 
-            return GetRouteBuildingName(stops[stops.Count - 1]);
+                    return GetRouteBuildingName(distanceFront < distanceBack ? stops[0] : stops[stops.Count - 1]);
+                }
+            }
         }
         catch (Exception e)
         {
-            return "";
+            Mod.log.Info(e);
+            return "Error";
         }
     };
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using Colossal.IO.AssetDatabase;
 using Colossal.IO.AssetDatabase.Internal;
 using Colossal.Logging;
 using Game;
@@ -20,22 +21,21 @@ namespace TrainVisuals
     {
          public static ILog log = LogManager.GetLogger($"{typeof(Mod).Assembly.GetName().Name}.{nameof(Mod)}").SetShowsErrorsInUI(false);
         private static readonly BindingFlags allFlags = BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Instance | BindingFlags.Static | BindingFlags.DeclaredOnly | BindingFlags.GetField | BindingFlags.GetProperty;
-
+        public static Settings m_Setting;
+        
         public void OnLoad(UpdateSystem updateSystem)
         {
             log.Info(nameof(OnLoad));
 
             if (GameManager.instance.modManager.TryGetExecutableAsset(this, out var asset))
                 log.Info($"Current mod asset at {asset.path}");
+            m_Setting = new Settings(this);
+            m_Setting.RegisterInOptionsUI();
+            GameManager.instance.localizationManager.AddSource("en-US", new LocaleEN(m_Setting));
 
-            //updateSystem.UpdateAt<HomelessRemoverSystem>(SystemUpdatePhase.PrefabUpdate);
+
+            AssetDatabase.global.LoadSettings(nameof(TrainVisuals), m_Setting, new Settings(this));
             GameManager.instance.onGameLoadingComplete += DoWhenLoaded;
-            var mHarmony = new Harmony("Mods_TrainVisuals");
-            mHarmony.PatchAll();
-            Harmony.GetAllPatchedMethods().ForEach(m => {
-                if (m.GetType() == typeof(Mod))
-                    log.Info($"Patched: {m.Name}");
-            });
         }
 
         private void DoWhenLoaded(Colossal.Serialization.Entities.Purpose purpose, GameMode mode)
