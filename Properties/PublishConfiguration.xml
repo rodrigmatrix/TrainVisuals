@@ -32,17 +32,13 @@ Thanks to Klyte45 for his incredible work
 	<Tag Value="Code Mod" />
 	<!--Link to the forum post where the mod can be discussed-->
 	<ForumLink Value="https://forum.paradoxplaza.com/forum/threads/train-visuals-mod.1719529/" />
-	<ModVersion Value="1.2" />
+	<ModVersion Value="1.3.2" />
 	<GameVersion Value="1.*" />
 	<Dependency Id="92908" />
 	<Dependency Id="75426" />
   <ChangeLog>
-# Release 1.2
-- New destination type settings. Go to Game Settings -> Train Visuals and Select between three options:
-	  - Final Destination: The station the train bounds to.
-	  - Next Station: The next station the train will stop.
-	  - Line Name: The name of the line the train belongs to.
-- Fixed issue for Final Destination. Stations with only one stop will be used as final destinations.
+# Release 1.3.2
+ - Updated to new game version
   </ChangeLog>
 	<ExternalLink Type="kofi" Url="https://ko-fi.com/rodrigmatrix" />
 	<ExternalLink Type="github" Url="https://github.com/rodrigmatrix/TrainVisuals" />
